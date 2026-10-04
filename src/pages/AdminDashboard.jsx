@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getLeads, updateLeadStatus, deleteLead, addManualLead } from '../services/leadService';
 import { getProjects, addProject, deleteProject } from '../services/projectService';
 import { getBlogs, addBlog, deleteBlog } from '../services/blogService';
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
 import { company } from '../data/company';
 import { updateSEO } from '../utils/seo';
 import { Logo } from '../components/common/Logo';
@@ -25,14 +27,25 @@ export const AdminDashboard = () => {
   }, []);
 
   // Auth State
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem(AUTH_KEY) === 'true' || sessionStorage.getItem(AUTH_KEY) === 'true';
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setIsAuthenticated(true);
+        setUser(currentUser);
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
   const [authError, setAuthError] = useState('');
 
   // Active Tab: 'leads' | 'projects'
@@ -131,35 +144,37 @@ export const AdminDashboard = () => {
   }, [isAuthenticated]);
 
   // Handle Login
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const u = usernameInput.trim().toLowerCase();
-    const p = passwordInput.trim();
-
-    const isValidUser = u === 'techwants' || u === 'techwantsadmin' || u === 'admin';
-    const isValidPass = p === ADMIN_PASSWORD;
-
-    if (isValidUser && isValidPass) {
-      if (rememberMe) {
-        localStorage.setItem(AUTH_KEY, 'true');
-      } else {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-      }
-      setIsAuthenticated(true);
+    try {
+      await signInWithEmailAndPassword(auth, usernameInput.trim(), passwordInput.trim());
       setAuthError('');
       showToast("Welcome back, Admin!");
-    } else {
-      setAuthError('Invalid Username or Password. Please check your credentials.');
+    } catch (error) {
+      setAuthError('Invalid Email or Password.');
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      setAuthError('');
+      showToast("Welcome back, Admin!");
+    } catch (error) {
+      setAuthError('Google Sign-in failed.');
     }
   };
 
   // Handle Logout
-  const handleLogout = () => {
-    localStorage.removeItem(AUTH_KEY);
-    sessionStorage.removeItem(AUTH_KEY);
-    setIsAuthenticated(false);
-    setUsernameInput('');
-    setPasswordInput('');
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUsernameInput('');
+      setPasswordInput('');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Lead Status Change
@@ -430,15 +445,15 @@ export const AdminDashboard = () => {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">Username</label>
+              <label className="block text-xs font-bold text-slate-300 mb-1.5">Email Address</label>
               <div className="relative">
                 <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="text"
+                  type="email"
                   required
                   value={usernameInput}
                   onChange={(e) => setUsernameInput(e.target.value)}
-                  placeholder="Enter Username"
+                  placeholder="admin@example.com"
                   className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-brand-600 transition-colors"
                 />
               </div>
@@ -466,24 +481,33 @@ export const AdminDashboard = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-xs pt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-300">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded bg-slate-950 border-slate-800 text-brand-600 focus:ring-0"
-                />
-                <span>Remember me on this device</span>
-              </label>
-            </div>
+
 
             <button
               type="submit"
               className="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm transition-all shadow-lg shadow-brand-600/25 active:scale-95 flex items-center justify-center gap-2"
             >
               <ShieldCheck className="w-4 h-4" />
-              <span>Unlock Admin Panel</span>
+              <span>Sign In with Email</span>
+            </button>
+            <div className="relative flex py-2 items-center">
+              <div className="flex-grow border-t border-slate-800"></div>
+              <span className="flex-shrink-0 mx-4 text-slate-500 text-xs font-medium">OR</span>
+              <div className="flex-grow border-t border-slate-800"></div>
+            </div>
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm transition-all shadow-md shadow-slate-900 active:scale-95 flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                <path fill="none" d="M1 1h22v22H1z" />
+              </svg>
+              <span>Sign In with Google</span>
             </button>
           </form>
 
