@@ -7,9 +7,14 @@ export const updateSEO = ({
   title,
   description,
   canonicalUrl,
+  ogImage,
   ogType = 'website',
   schemaData = null
 }) => {
+  const currentUrl = canonicalUrl || window.location.href;
+  const defaultImage = `${company.website}/logo.webp`;
+  const finalImage = ogImage || defaultImage;
+
   // Title
   const siteTitle = title ? `${title} | ${company.name}` : `${company.name} | ${company.tagline}`;
   document.title = siteTitle;
@@ -42,6 +47,69 @@ export const updateSEO = ({
   }
   ogDesc.content = metaDesc;
 
+  // Open Graph Image
+  let ogImg = document.querySelector('meta[property="og:image"]');
+  if (!ogImg) {
+    ogImg = document.createElement('meta');
+    ogImg.setAttribute('property', 'og:image');
+    document.head.appendChild(ogImg);
+  }
+  ogImg.content = finalImage;
+
+  // Open Graph URL
+  let ogUrl = document.querySelector('meta[property="og:url"]');
+  if (!ogUrl) {
+    ogUrl = document.createElement('meta');
+    ogUrl.setAttribute('property', 'og:url');
+    document.head.appendChild(ogUrl);
+  }
+  ogUrl.content = currentUrl;
+
+  // Open Graph Type
+  let typeMeta = document.querySelector('meta[property="og:type"]');
+  if (!typeMeta) {
+    typeMeta = document.createElement('meta');
+    typeMeta.setAttribute('property', 'og:type');
+    document.head.appendChild(typeMeta);
+  }
+  typeMeta.content = ogType;
+
+  // Twitter Card
+  let twCard = document.querySelector('meta[name="twitter:card"]');
+  if (!twCard) {
+    twCard = document.createElement('meta');
+    twCard.setAttribute('name', 'twitter:card');
+    document.head.appendChild(twCard);
+  }
+  twCard.content = 'summary_large_image';
+
+  // Twitter Title
+  let twTitle = document.querySelector('meta[name="twitter:title"]');
+  if (!twTitle) {
+    twTitle = document.createElement('meta');
+    twTitle.setAttribute('name', 'twitter:title');
+    document.head.appendChild(twTitle);
+  }
+  twTitle.content = siteTitle;
+
+  // Twitter Description
+  let twDesc = document.querySelector('meta[name="twitter:description"]');
+  if (!twDesc) {
+    twDesc = document.createElement('meta');
+    twDesc.setAttribute('name', 'twitter:description');
+    document.head.appendChild(twDesc);
+  }
+  twDesc.content = metaDesc;
+
+  // Twitter Image
+  let twImage = document.querySelector('meta[name="twitter:image"]');
+  if (!twImage) {
+    twImage = document.createElement('meta');
+    twImage.setAttribute('name', 'twitter:image');
+    document.head.appendChild(twImage);
+  }
+  twImage.content = finalImage;
+
   // Canonical Link
   let canonicalLink = document.querySelector('link[rel="canonical"]');
   if (!canonicalLink) {
@@ -49,7 +117,7 @@ export const updateSEO = ({
     canonicalLink.rel = 'canonical';
     document.head.appendChild(canonicalLink);
   }
-  canonicalLink.href = canonicalUrl || window.location.href;
+  canonicalLink.href = currentUrl;
 
   // JSON-LD Schema
   let schemaScript = document.querySelector('script[type="application/ld+json"]');
