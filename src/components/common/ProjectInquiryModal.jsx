@@ -43,13 +43,14 @@ export const ProjectInquiryModal = ({ isOpen, onClose }) => {
 
     setSubmitted(true);
 
-    // Generate WhatsApp URL and redirect after 1 sec
+    // Generate WhatsApp URL and open synchronously to avoid popup blockers
     const waUrl = generateProjectInquiryWhatsAppUrl(formData);
+    window.open(waUrl, '_blank');
+    
     setTimeout(() => {
-      window.open(waUrl, '_blank');
       onClose();
       setSubmitted(false);
-    }, 1200);
+    }, 2000);
   };
 
   return (

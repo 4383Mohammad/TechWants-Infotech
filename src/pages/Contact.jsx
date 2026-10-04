@@ -46,10 +46,12 @@ export const Contact = ({ onOpenInquiryModal }) => {
     setSubmitted(true);
 
     const waUrl = generateFormWhatsAppUrl(formData);
+    // Open synchronously to avoid popup blockers
+    window.open(waUrl, '_blank');
+    
     setTimeout(() => {
-      window.open(waUrl, '_blank');
       setSubmitted(false);
-    }, 1200);
+    }, 3000);
   };
 
   return (
