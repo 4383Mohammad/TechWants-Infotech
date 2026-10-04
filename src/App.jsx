@@ -21,6 +21,7 @@ const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })))
 const BlogDetails = lazy(() => import('./pages/BlogDetails').then(m => ({ default: m.BlogDetails })));
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 export function App() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
@@ -53,7 +54,7 @@ export function App() {
                 <Route path="/blog/:slug" element={<BlogDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
                 <Route path="/contact" element={<Contact onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
                 <Route path="/controlpanel" element={<AdminDashboard />} />
-                <Route path="*" element={<Home onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </PageTransition>
