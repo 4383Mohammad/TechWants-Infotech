@@ -690,7 +690,7 @@ export const AdminDashboard = () => {
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
+                  <table className="w-full min-w-[800px] text-left border-collapse whitespace-nowrap">
                     <thead>
                       <tr className="bg-slate-950/80 border-b border-slate-800 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
                         <th className="py-4 px-6">Client Name</th>
