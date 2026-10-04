@@ -652,7 +652,7 @@ export const AdminDashboard = () => {
               </div>
 
               {/* Status Filter Tabs */}
-              <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+              <div className="flex items-center gap-1.5 flex-wrap w-full md:w-auto pb-1 md:pb-0">
                 {['All', 'New', 'Contacted', 'In Discussion', 'Converted', 'Closed'].map((tab) => (
                   <button
                     key={tab}
