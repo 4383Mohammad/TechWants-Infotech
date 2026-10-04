@@ -12,14 +12,14 @@ import { Home } from './pages/Home';
 
 // Code Splitting with React Lazy
 
-const About       = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
-const Services    = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
-const Projects    = lazy(() => import('./pages/Projects').then(m => ({ default: m.Projects })));
+const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
+const Services = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
+const Projects = lazy(() => import('./pages/Projects').then(m => ({ default: m.Projects })));
 const ProjectDetails = lazy(() => import('./pages/ProjectDetails').then(m => ({ default: m.ProjectDetails })));
-const Technologies  = lazy(() => import('./pages/Technologies').then(m => ({ default: m.Technologies })));
-const Blog          = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
-const BlogDetails   = lazy(() => import('./pages/BlogDetails').then(m => ({ default: m.BlogDetails })));
-const Contact       = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
+const Technologies = lazy(() => import('./pages/Technologies').then(m => ({ default: m.Technologies })));
+const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
+const BlogDetails = lazy(() => import('./pages/BlogDetails').then(m => ({ default: m.BlogDetails })));
+const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 
 export function App() {
@@ -43,17 +43,17 @@ export function App() {
           <PageTransition>
             <Suspense fallback={<PageSkeleton variant="default" />}>
               <Routes>
-                <Route path="/"           element={<Home            onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/about"      element={<About           onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/services"   element={<Services        onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/projects"   element={<Projects        onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/" element={<Home onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/about" element={<About onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/services" element={<Services onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/projects" element={<Projects onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
                 <Route path="/projects/:slug" element={<ProjectDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/technologies"  element={<Technologies   onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/blog"       element={<Blog            onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/blog/:slug" element={<BlogDetails     onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/contact"    element={<Contact         onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/admin"      element={<AdminDashboard />} />
-                <Route path="*"           element={<Home            onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/technologies" element={<Technologies onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/blog" element={<Blog onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/blog/:slug" element={<BlogDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/contact" element={<Contact onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                <Route path="/controlpanel" element={<AdminDashboard />} />
+                <Route path="*" element={<Home onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
               </Routes>
             </Suspense>
           </PageTransition>
