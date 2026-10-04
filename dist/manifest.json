@@ -1,0 +1,16 @@
+{
+  "name": "TechWants Infotech",
+  "short_name": "TechWants",
+  "description": "TechWants Infotech builds professional digital solutions that help businesses grow. Custom Web Development, SEO, ERP software, and E-commerce development by Founder Mansuri Mohammad.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#db2777",
+  "theme_color": "#db2777",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

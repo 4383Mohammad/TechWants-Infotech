@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "slug": "seo-vs-aeo-vs-geo-ai-search-guide",
+    "title": "SEO vs AEO vs GEO: How AI Is Transforming Search in 2026",
+    "category": "AEO & GEO",
+    "author": "Mansuri Mohammad",
+    "date": "October 1, 2026",
+    "updatedAt": "October 1, 2026",
+    "readTime": "6 min read",
+    "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1200&q=80",
+    "excerpt": "Discover the differences between Search Engine Optimization (SEO), Answer Engine Optimization (AEO), and Generative Engine Optimization (GEO).",
+    "content": "\nSearch engine optimization has evolved into a multi-dimensional digital growth discipline. Modern search visibility requires a combined strategy of SEO, AEO, and GEO.\n\n## 1. What is SEO (Search Engine Optimization)?\nSearch Engine Optimization (SEO) is the technical and content process of optimizing websites to rank in traditional search engine results pages (SERPs) like Google and Bing.\n\n## 2. What is AEO (Answer Engine Optimization)?\nAnswer Engine Optimization (AEO) focuses on structuring content with direct definitions, concise answer-first summaries, and FAQPage Schema so answer engines (like Google Featured Snippets and Voice Assistants) can deliver direct answers.\n\n## 3. What is GEO (Generative Engine Optimization)?\nGenerative Engine Optimization (GEO) ensures that generative AI search platforms (such as ChatGPT, Perplexity, Gemini, and Claude) accurately understand, cite, and reference your brand entity and service capabilities.\n\n## How TechWants Infotech Optimizes for SEO, AEO, and GEO\nAt TechWants Infotech, Founder Mansuri Mohammad integrates structured JSON-LD schema, semantic HTML, entity clarity, and answer-first content structures across all web development projects.\n    ",
+    "tags": ["SEO", "AEO", "GEO", "AI Search", "Digital Growth"]
+  },
+  {
+    "id": 2,
+    "slug": "what-is-generative-engine-optimization-geo",
+    "title": "What Is Generative Engine Optimization (GEO)?",
+    "category": "GEO",
+    "author": "Mansuri Mohammad",
+    "date": "September 28, 2026",
+    "updatedAt": "September 28, 2026",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    "excerpt": "Generative Engine Optimization (GEO) helps AI engines like ChatGPT and Gemini understand and cite your business accurately.",
+    "content": "\nGenerative Engine Optimization (GEO) is the strategy of structuring business information, technical metadata, and topical authority so AI search engines cite your company in generative answers.\n\n## Core Principles of Generative Engine Optimization (GEO):\n- **Clear Entity Definition:** Explicitly defining who the company is, who founded it (Mansuri Mohammad), and what services are offered.\n- **Structured Data Schema:** Implementing Organization, Service, and FAQ Schema tags.\n- **Factual, Direct Content:** Providing clear, non-fluff definitions that AI algorithms can index and summarize.\n\nTechWants Infotech builds websites engineered with maximum technical GEO readiness.\n    ",
+    "tags": ["GEO", "AI Optimization", "Generative AI", "TechWants Infotech"]
+  },
+  {
+    "id": 3,
+    "slug": "why-modern-businesses-need-fast-custom-website",
+    "title": "Why Modern Businesses Need a Fast, Custom Website in 2026",
+    "category": "Web Development",
+    "author": "Mansuri Mohammad",
+    "date": "September 24, 2026",
+    "updatedAt": "September 24, 2026",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    "excerpt": "Generic site templates are slow and unoptimized. Discover why bespoke custom web applications drive higher search rankings and client trust.",
+    "content": "\nIn today's competitive digital landscape, your business website is often the very first interaction a potential customer has with your brand. A slow, outdated template site creates friction and drives visitors to competitors.\n\n## 1. Speed & User Experience\nSlow websites reduce conversion rates. Custom web applications built with modern frameworks like React and Vite load instantly and deliver seamless page transitions.\n\n## 2. Tailored Lead Generation\nCustom websites allow you to design intuitive lead paths, instant WhatsApp consultation triggers, and custom forms built specifically for your sales pipeline.\n\n## 3. Technical SEO Advantage\nSearch engines prioritize clean code, fast Core Web Vitals, and responsive layouts. Custom-coded websites eliminate bloated plugin code.\n    ",
+    "tags": ["Web Development", "React", "Business Growth", "SEO"]
+  },
+  {
+    "id": 4,
+    "slug": "local-seo-and-google-business-growth-guide",
+    "title": "The Ultimate Local SEO & Google Business Profile Strategy",
+    "category": "SEO",
+    "author": "Mansuri Mohammad",
+    "date": "September 20, 2026",
+    "updatedAt": "September 20, 2026",
+    "readTime": "6 min read",
+    "image": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80",
+    "excerpt": "Learn how local businesses can dominate Google search results and attract high-intent local customer phone calls.",
+    "content": "\nWhen local customers search for services nearby, Google's Local Map Pack appears right at the top of the search page. Winning those top map spots requires a targeted Local SEO strategy.\n\n## 1. Complete Your Google Business Profile\nEnsure every detail—your phone number (+91 9327438342), business address, operating hours, service categories, and photos—is verified and updated regularly.\n\n## 2. On-Page Local Keyword Optimization\nIntegrate local geographic modifiers into your website titles, headings, and schema markup.\n\n## 3. Citation Consistency\nEnsure your Name, Address, and Phone Number (NAP) remain identical across all online directories and business listings.\n    ",
+    "tags": ["SEO", "Local SEO", "Google Business Profile", "Digital Marketing"]
+  },
+  {
+    "id": 5,
+    "slug": "how-custom-erp-automates-business-operations",
+    "title": "How Custom ERP Systems Automate Business Operations",
+    "category": "ERP",
+    "author": "Mansuri Mohammad",
+    "date": "September 15, 2026",
+    "updatedAt": "September 15, 2026",
+    "readTime": "7 min read",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    "excerpt": "Stop relying on chaotic spreadsheets. Learn how custom cloud software unifies inventory, billing, and staff management.",
+    "content": "\nAs businesses scale, managing inventory, billing, and customer relationships across separate spreadsheets becomes increasingly error-prone and time-consuming.\n\n## The Power of Centralized Data\nA custom Enterprise Resource Planning (ERP) system connects your sales team, stock managers, and finance department to a single real-time database.\n\n## Key Benefits of Custom ERP Development:\n- **Real-Time Stock Alerts:** Receive automatic notifications before critical inventory runs out.\n- **Automated Billing:** Generate thermal receipts or PDF invoices in seconds.\n- **Role-Based Security:** Control exactly which team members can view sensitive financial reports.\n    ",
+    "tags": ["ERP", "Business Automation", "Custom Software", "Efficiency"]
+  }
+]
