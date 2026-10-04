@@ -27,13 +27,12 @@ export const AdminDashboard = () => {
 
   // Auth State
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem(AUTH_KEY) === 'true' || sessionStorage.getItem(AUTH_KEY) === 'true';
+    return sessionStorage.getItem(AUTH_KEY) === 'true';
   });
 
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
   const [authError, setAuthError] = useState('');
 
   // Active Tab: 'leads' | 'projects'
@@ -141,11 +140,7 @@ export const AdminDashboard = () => {
     const isValidPass = p === ADMIN_PASSWORD;
 
     if (isValidUser && isValidPass) {
-      if (rememberMe) {
-        localStorage.setItem(AUTH_KEY, 'true');
-      } else {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-      }
+      sessionStorage.setItem(AUTH_KEY, 'true');
       setIsAuthenticated(true);
       setAuthError('');
       showToast("Welcome back, Admin!");
@@ -156,7 +151,6 @@ export const AdminDashboard = () => {
 
   // Handle Logout
   const handleLogout = () => {
-    localStorage.removeItem(AUTH_KEY);
     sessionStorage.removeItem(AUTH_KEY);
     setIsAuthenticated(false);
     setUsernameInput('');
@@ -468,19 +462,6 @@ export const AdminDashboard = () => {
               </div>
             </div>
 
-
-
-            <div className="flex items-center justify-between text-xs pt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-300">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded bg-slate-950 border-slate-800 text-brand-600 focus:ring-0"
-                />
-                <span>Remember me on this device</span>
-              </label>
-            </div>
 
             <button
               type="submit"
