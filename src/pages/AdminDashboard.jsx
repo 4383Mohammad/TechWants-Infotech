@@ -158,6 +158,9 @@ export const AdminDashboard = () => {
   const handleGoogleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: 'select_account'
+      });
       await signInWithPopup(auth, provider);
       setAuthError('');
       showToast("Welcome back, Admin!");
