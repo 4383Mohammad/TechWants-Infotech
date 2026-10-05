@@ -13,11 +13,11 @@ export const FloatingWhatsApp = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2 pointer-events-none">
       
       {/* Tooltip Popup */}
       {showTooltip && (
-        <div className="relative bg-white border border-green-200 text-slate-800 text-xs font-semibold px-3.5 py-2 rounded-2xl shadow-xl max-w-[240px] sm:max-w-xs flex items-center gap-2"
+        <div className="relative bg-white border border-green-200 text-slate-800 text-xs font-semibold px-3.5 py-2 rounded-2xl shadow-xl max-w-[240px] sm:max-w-xs flex items-center gap-2 pointer-events-auto"
           style={{ animation: 'fadeUp 0.3s ease-out both' }}
         >
           <span>Quick Project Chat on <strong>WhatsApp</strong></span>
@@ -25,7 +25,7 @@ export const FloatingWhatsApp = () => {
             type="button"
             onClick={handleClose}
             aria-label="Close tooltip"
-            className="text-slate-400 hover:text-slate-800 p-1 shrink-0 rounded-full hover:bg-slate-100 transition-colors duration-150 relative z-10"
+            className="text-slate-400 hover:text-slate-800 p-1 shrink-0 rounded-full hover:bg-slate-100 transition-colors duration-150 relative z-10 pointer-events-auto"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -40,7 +40,7 @@ export const FloatingWhatsApp = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with TechWants Infotech on WhatsApp"
-        className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/40 hover:shadow-xl hover:shadow-green-600/60 border border-green-500/30 transition-all duration-300 hover:scale-110 active:scale-95 shrink-0"
+        className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/40 hover:shadow-xl hover:shadow-green-600/60 border border-green-500/30 transition-all duration-300 hover:scale-110 active:scale-95 shrink-0 pointer-events-auto"
       >
         {/* Ambient Ring */}
         <span className="absolute -inset-1 rounded-full bg-green-500/20 opacity-60 pointer-events-none"></span>

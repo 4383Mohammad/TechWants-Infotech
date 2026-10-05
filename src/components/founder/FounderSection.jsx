@@ -1,41 +1,18 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Phone, Mail, MessageSquareCode, Linkedin, CheckCircle2, ArrowRight, Maximize2, X, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
+import { Phone, Mail, MessageSquareCode, Linkedin, CheckCircle2, ArrowRight, Maximize2, X, Camera } from 'lucide-react';
 import { company } from '../../data/company';
 import { getWhatsAppUrl } from '../../utils/contact';
-import founderPhoto1 from '../../assets/founder/mansuri_mohammad.jpg';
-import founderPhoto2 from '../../assets/founder/mansuri_mohammad_2.webp';
+import founderPhotoMain from '../../assets/founder/founder_main.jpg';
 
-const founderPhotos = [
-  {
-    id: 1,
-    src: founderPhoto1,
-    title: "Mansuri Mohammad",
-    alt: "Mansuri Mohammad - Founder TechWants Infotech"
-  },
-  {
-    id: 2,
-    src: founderPhoto2,
-    title: "Executive Pose",
-    alt: "Mansuri Mohammad - Founder TechWants Infotech Executive Pose"
-  }
-];
+const activePhoto = {
+  src: founderPhotoMain,
+  title: "Mansuri Mohammad",
+  alt: "Mansuri Mohammad - Founder TechWants Infotech"
+};
 
 export const FounderSection = ({ onOpenInquiryModal }) => {
-  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
-  const activePhoto = founderPhotos[activePhotoIdx];
-
-  const handlePrev = (e) => {
-    e.stopPropagation();
-    setActivePhotoIdx((prev) => (prev === 0 ? founderPhotos.length - 1 : prev - 1));
-  };
-
-  const handleNext = (e) => {
-    e.stopPropagation();
-    setActivePhotoIdx((prev) => (prev === founderPhotos.length - 1 ? 0 : prev + 1));
-  };
 
   return (
     <section className="py-12 sm:py-20 bg-white relative overflow-hidden">
@@ -68,12 +45,7 @@ export const FounderSection = ({ onOpenInquiryModal }) => {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-black/20"></div>
 
                   {/* Top Badge & Lightbox Trigger */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-auto">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold tracking-wide">
-                      <Camera className="w-3 h-3 text-brand-400" />
-                      {activePhotoIdx + 1} / {founderPhotos.length}
-                    </span>
-
+                  <div className="absolute top-3 right-3 flex items-center justify-end pointer-events-auto">
                     <button
                       onClick={() => setIsLightboxOpen(true)}
                       aria-label="Enlarge founder image"
@@ -82,22 +54,6 @@ export const FounderSection = ({ onOpenInquiryModal }) => {
                       <Maximize2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
-
-                  {/* Navigation Arrows on Hover */}
-                  <button
-                    onClick={handlePrev}
-                    aria-label="Previous photo"
-                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 hover:bg-black/80 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    aria-label="Next photo"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 hover:bg-black/80 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
                   
                   {/* Overlay Title */}
                   <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -106,35 +62,6 @@ export const FounderSection = ({ onOpenInquiryModal }) => {
                       {company.designation}
                     </div>
                   </div>
-                </div>
-
-                {/* Thumbnails Bar */}
-                <div className="mt-4 grid grid-cols-2 gap-2.5 w-full">
-                  {founderPhotos.map((photo, idx) => (
-                    <button
-                      key={photo.id}
-                      onClick={() => setActivePhotoIdx(idx)}
-                      aria-label={`View ${photo.title} of Mansuri Mohammad`}
-                      className={`relative rounded-xl overflow-hidden border-2 transition-all aspect-[3/4] ${
-                        activePhotoIdx === idx
-                          ? 'border-brand-600 ring-2 ring-brand-500/30 shadow-md scale-105'
-                          : 'border-slate-200 opacity-70 hover:opacity-100 hover:border-brand-300'
-                      }`}
-                    >
-                      <img
-                        src={photo.src}
-                        alt={`Thumbnail ${idx + 1}`}
-                        width="200"
-                        height="300"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover object-top"
-                      />
-                      {activePhotoIdx === idx && (
-                        <div className="absolute inset-0 bg-brand-600/15 border-2 border-brand-500 rounded-lg"></div>
-                      )}
-                    </button>
-                  ))}
                 </div>
 
               </div>
@@ -269,36 +196,6 @@ export const FounderSection = ({ onOpenInquiryModal }) => {
               <div className="text-xs text-pink-300 font-medium">{activePhoto.title} — {company.designation}</div>
             </div>
 
-            {/* Lightbox Navigation */}
-            <button
-              onClick={handlePrev}
-              aria-label="Previous photo in lightbox"
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md transition-all"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={handleNext}
-              aria-label="Next photo in lightbox"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 backdrop-blur-md transition-all"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Lightbox Thumbnails */}
-            <div className="flex items-center gap-3 mt-4">
-              {founderPhotos.map((photo, idx) => (
-                <button
-                  key={photo.id}
-                  onClick={() => setActivePhotoIdx(idx)}
-                  className={`w-12 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                    activePhotoIdx === idx ? 'border-brand-500 scale-110 ring-2 ring-brand-500/50' : 'border-white/30 opacity-50 hover:opacity-100'
-                  }`}
-                >
-                  <img src={photo.src} alt="" className="w-full h-full object-cover object-top" />
-                </button>
-              ))}
-            </div>
           </div>
         </div>,
         document.body

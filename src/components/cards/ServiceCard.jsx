@@ -19,7 +19,7 @@ export const ServiceCard = ({ service, onOpenInquiryModal }) => {
   const whatsappUrl = generateServiceWhatsAppUrl(service.title);
 
   return (
-    <div className="group relative bg-gradient-to-br from-pink-50/70 via-white to-pink-50/20 rounded-3xl p-6 sm:p-8 border border-pink-100/90 shadow-sm hover:shadow-xl hover:border-brand-600/30 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+    <div className="h-full w-full group relative bg-gradient-to-br from-pink-50/70 via-white to-pink-50/20 rounded-3xl p-6 sm:p-8 border border-pink-100/90 shadow-sm hover:shadow-xl hover:border-brand-600/30 transition-all duration-300 flex flex-col justify-between overflow-hidden">
       
       {/* Subtle background glow on hover — opacity only (no blur = no repaint) */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand-600/0 group-hover:bg-brand-600/8 rounded-full transition-colors duration-300"></div>

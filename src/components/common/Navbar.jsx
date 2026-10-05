@@ -320,16 +320,16 @@ export const Navbar = ({ onOpenInquiryModal }) => {
       {/*  Shows when user scrolls back to top    */}
       {/* ─────────────────────────────────────── */}
       <div
-        aria-hidden={!(!atTop && hidden)}
+        aria-hidden={atTop}
         className={[
-          'fixed bottom-24 right-5 z-40 transition-all duration-300',
-          !atTop && hidden ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none',
+          'fixed bottom-32 right-4 sm:bottom-36 sm:right-6 z-40 transition-all duration-300',
+          !atTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none',
         ].join(' ')}
       >
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Scroll back to top"
-          tabIndex={(!atTop && hidden) ? 0 : -1}
+          tabIndex={!atTop ? 0 : -1}
           className="w-11 h-11 rounded-2xl bg-white border border-slate-200 shadow-lg flex items-center justify-center text-brand-700 hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all duration-200 hover:scale-110 active:scale-95"
         >
           <ChevronDown className="w-5 h-5 rotate-180" />
