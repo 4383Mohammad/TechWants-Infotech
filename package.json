@@ -10,13 +10,18 @@
     "preview": "serve -s dist -l 3000"
   },
   "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "firebase": "^12.19.0",
+    "framer-motion": "^14.0.0",
     "lucide-react": "^0.441.0",
+    "maath": "^0.10.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^6.26.2",
-    "sharp": "^0.35.5"
+    "sharp": "^0.35.5",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
