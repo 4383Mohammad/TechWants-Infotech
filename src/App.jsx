@@ -1,5 +1,5 @@
-import React, { useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 const FloatingWhatsApp = lazy(() => import('./components/widgets/FloatingWhatsApp').then(m => ({ default: m.FloatingWhatsApp })));
@@ -23,6 +23,21 @@ const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Con
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Disable default browser scroll restoration on refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    // Scroll to top instantly on route change or refresh
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 export function App() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
 
@@ -33,6 +48,7 @@ export function App() {
         v7_relativeSplatPath: true,
       }}
     >
+      <ScrollToTop />
       {/* YouTube-style top progress bar — fires on every route change */}
       <TopProgressBar />
 
