@@ -129,20 +129,34 @@ export const updateSEO = ({
 
   const defaultSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "LocalBusiness"],
     "name": company.name,
+    "alternateName": "TechWants",
     "url": company.website,
     "logo": `${company.website}/favicon-512x512.png`,
+    "image": `${company.website}/favicon-512x512.png`,
     "description": company.bio,
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Gujarat",
+      "addressCountry": "IN"
+    },
     "founder": {
       "@type": "Person",
       "name": company.founder,
-      "jobTitle": company.designation
+      "alternateName": ["Mansuri Mohammad"],
+      "jobTitle": company.designation,
+      "url": company.website,
+      "sameAs": [
+        company.social.linkedin,
+        company.social.github
+      ]
     },
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": company.phone,
       "contactType": "customer service",
+      "email": company.email,
       "areaServed": "IN",
       "availableLanguage": ["English", "Hindi", "Gujarati"]
     }
