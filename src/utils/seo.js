@@ -132,7 +132,7 @@ export const updateSEO = ({
     "@type": "Organization",
     "name": company.name,
     "url": company.website,
-    "logo": `${company.website}/favicon.svg`,
+    "logo": `${company.website}/favicon-512x512.png`,
     "description": company.bio,
     "founder": {
       "@type": "Person",
