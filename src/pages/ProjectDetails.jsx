@@ -9,6 +9,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { getWhatsAppUrl } from '../utils/contact';
 import { updateSEO } from '../utils/seo';
 import { buildBreadcrumbSchema } from '../utils/schema';
+import { company } from '../data/company';
 
 export const ProjectDetails = ({ onOpenInquiryModal }) => {
   const { slug } = useParams();
@@ -23,14 +24,14 @@ export const ProjectDetails = ({ onOpenInquiryModal }) => {
       setLoading(false);
       if (p) {
         const breadcrumbSchema = buildBreadcrumbSchema([
-          { name: "Projects", url: "https://techwantsinfotech.com/projects" },
-          { name: p.title, url: `https://techwantsinfotech.com/projects/${p.slug}` }
+          { name: "Projects", url: `${company.website}/projects` },
+          { name: p.title, url: `${company.website}/projects/${p.slug}` }
         ]);
 
         updateSEO({
           title: p.title,
           description: p.shortDescription || p.description,
-          canonicalUrl: `https://techwantsinfotech.com/projects/${p.slug}`,
+          canonicalUrl: `${company.website}/projects/${p.slug}`,
           schemaData: breadcrumbSchema
         });
       }

@@ -22,6 +22,7 @@ const BlogDetails = lazy(() => import('./pages/BlogDetails').then(m => ({ defaul
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -57,21 +58,24 @@ export function App() {
         <div className="flex-1">
           {/* PageTransition wraps the routes and handles the curtain sweep animation */}
           <PageTransition>
-            <Suspense fallback={<PageSkeleton variant="default" />}>
-              <Routes>
-                <Route path="/" element={<Home onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/about" element={<About onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/services" element={<Services onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/projects" element={<Projects onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/projects/:slug" element={<ProjectDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/technologies" element={<Technologies onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/blog" element={<Blog onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/blog/:slug" element={<BlogDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/contact" element={<Contact onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
-                <Route path="/controlpanel" element={<AdminDashboard />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<PageSkeleton variant="default" />}>
+                <Routes>
+                  <Route path="/" element={<Home onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/about" element={<About onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/services" element={<Services onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/projects" element={<Projects onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/projects/:slug" element={<ProjectDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/technologies" element={<Technologies onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/blog" element={<Blog onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/blog/:slug" element={<BlogDetails onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/contact" element={<Contact onOpenInquiryModal={() => setInquiryModalOpen(true)} />} />
+                  <Route path="/controlpanel" element={<AdminDashboard />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </PageTransition>
         </div>
 
