@@ -1,7 +1,7 @@
 # TechWants Infotech – Premium IT Company Website & Lead Generation Platform
 
 > **Ideas. Innovation. Impact.**
-> Professional IT company website for TechWants Infotech, founded by Mansuri Mohammad.
+> Professional IT company website for TechWants Infotech.
 
 ---
 
@@ -11,7 +11,6 @@ TechWants Infotech is a state-of-the-art Single Page Application (SPA) designed 
 ### Key Highlights
 - ⚡ **Dynamic Project System:** Easily add new client projects to `src/data/projects.js` without touching React UI components.
 - 📱 **WhatsApp Inquiry Integration:** Instant pre-filled WhatsApp lead generation targeted at **+91 9327438342**.
-- 💼 **Founder Spotlight:** Highlighting Founder & Technology Consultant **Mansuri Mohammad**.
 - 🎨 **Visual Aesthetics:** Electric Royal Blue, Dark Navy accents, White canvas, Soft Blue ambient glows, Glassmorphism, and Framer Motion micro-animations.
 - 📊 **Future-Ready Admin Dashboard:** Includes lead management table, status progression (New, Contacted, In Discussion, Converted, Closed), and project analytics.
 - 🔍 **SEO & Analytics:** Structured metadata, Open Graph cards, dynamic page titles, and clean semantic markup.
@@ -91,6 +90,5 @@ The new project will **automatically appear** in:
 
 ## 📞 Contact Information
 - **Company:** TechWants Infotech
-- **Founder:** Mansuri Mohammad
-- **Designation:** Founder & Technology Consultant
 - **Phone / WhatsApp:** +91 9327438342
+- **Email:** techwantsinfotech@gmail.com

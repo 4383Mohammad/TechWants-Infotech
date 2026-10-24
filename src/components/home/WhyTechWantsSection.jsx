@@ -42,7 +42,7 @@ const reasons = [
   {
     icon: MessageSquare,
     title: "Transparent Communication",
-    description: "Direct access to Founder & Technology Consultant Mansuri Mohammad throughout your project lifecycle.",
+    description: "Direct access to our senior engineering team throughout your project lifecycle.",
     color: "bg-slate-950 text-white",
     glow: "hover:shadow-brand-600/20",
   },

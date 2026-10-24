@@ -11,11 +11,6 @@ export const buildOrganizationSchema = () => ({
   "logo": `${company.website}/favicon.svg`,
   "telephone": company.phone,
   "description": company.bio,
-  "founder": {
-    "@type": "Person",
-    "name": company.founder,
-    "jobTitle": company.designation
-  },
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": company.phone,
@@ -84,8 +79,8 @@ export const buildArticleSchema = (article) => ({
   "datePublished": article.date,
   "dateModified": article.updatedAt || article.date,
   "author": {
-    "@type": "Person",
-    "name": article.author || company.founder
+    "@type": "Organization",
+    "name": article.author || company.name
   },
   "publisher": {
     "@type": "Organization",

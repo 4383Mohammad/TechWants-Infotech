@@ -10,7 +10,7 @@ export const Blog = ({ onOpenInquiryModal }) => {
   useEffect(() => {
     updateSEO({
       title: "Blog & Perspectives",
-      description: `Read technical insights and business automation articles by ${company.founder}, Founder of ${company.name}.`,
+      description: `Read technical insights and business automation articles by the ${company.name} team.`,
       canonicalUrl: `${company.website}/blog`
     });
   }, []);
@@ -61,7 +61,7 @@ export const Blog = ({ onOpenInquiryModal }) => {
             TECHWANTS <span className="text-gradient">BLOG & PERSPECTIVES</span>
           </h1>
           <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed">
-            Practical articles on modern web development, Technical SEO, custom ERP automation, and digital growth strategies by Founder Mansuri Mohammad.
+            Practical articles on modern web development, Technical SEO, custom ERP automation, and digital growth strategies by the TechWants Infotech team.
           </p>
         </div>
       </section>

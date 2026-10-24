@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ArrowRight, ShieldCheck, Heart } from 'lucide-react';
 import { company } from '../../data/company';
 import { services } from '../../data/services';
-import { getWhatsAppUrl } from '../../utils/contact';
+import { getWhatsAppUrl, getEmailComposeUrl, handleEmailClick } from '../../utils/contact';
 import { Logo } from './Logo';
 
 export const Footer = ({ onOpenInquiryModal }) => {
@@ -35,7 +35,10 @@ export const Footer = ({ onOpenInquiryModal }) => {
               </a>
               {company.email && (
                 <a
-                  href={`mailto:${company.email}`}
+                  href={getEmailComposeUrl("Inquiry from Website - TechWants Infotech")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => handleEmailClick(e, "Inquiry from Website - TechWants Infotech")}
                   aria-label={`Email TechWants Infotech: ${company.email}`}
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 text-xs transition-colors"
                 >
@@ -130,7 +133,6 @@ export const Footer = ({ onOpenInquiryModal }) => {
               <ShieldCheck className="w-4 h-4 text-brand-400 flex-shrink-0" />
               <span>Verified Tech Partner</span>
             </span>
-            <span>Founder: {company.founder}</span>
           </div>
         </div>
 

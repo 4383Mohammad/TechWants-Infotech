@@ -14,7 +14,6 @@ const WhyTechWantsSection = lazy(() => import('../components/home/WhyTechWantsSe
 const ProcessTimelineSection = lazy(() => import('../components/home/ProcessTimelineSection').then(m => ({ default: m.ProcessTimelineSection })));
 const TechnologiesPreviewSection = lazy(() => import('../components/home/TechnologiesPreviewSection').then(m => ({ default: m.TechnologiesPreviewSection })));
 const SEOSection = lazy(() => import('../components/home/SEOSection').then(m => ({ default: m.SEOSection })));
-const FounderSection = lazy(() => import('../components/founder/FounderSection').then(m => ({ default: m.FounderSection })));
 const FAQAccordion = lazy(() => import('../components/common/FAQAccordion').then(m => ({ default: m.FAQAccordion })));
 const CTASection = lazy(() => import('../components/widgets/CTASection').then(m => ({ default: m.CTASection })));
 
@@ -48,7 +47,6 @@ export const Home = ({ onOpenInquiryModal }) => {
         <ProcessTimelineSection />
         <TechnologiesPreviewSection />
         <SEOSection />
-        <FounderSection onOpenInquiryModal={onOpenInquiryModal} />
 
         {/* AEO / GEO FAQ Section */}
         <section className="py-20 bg-slate-50 border-t border-slate-100">

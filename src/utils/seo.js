@@ -141,17 +141,6 @@ export const updateSEO = ({
       "addressRegion": "Gujarat",
       "addressCountry": "IN"
     },
-    "founder": {
-      "@type": "Person",
-      "name": company.founder,
-      "alternateName": ["Mansuri Mohammad"],
-      "jobTitle": company.designation,
-      "url": company.website,
-      "sameAs": [
-        company.social.linkedin,
-        company.social.github
-      ]
-    },
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": company.phone,

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { FounderSection } from '../components/founder/FounderSection';
 import { WhyTechWantsSection } from '../components/home/WhyTechWantsSection';
 import { ProcessTimelineSection } from '../components/home/ProcessTimelineSection';
 import { CTASection } from '../components/widgets/CTASection';
@@ -10,8 +9,8 @@ import { updateSEO } from '../utils/seo';
 export const About = ({ onOpenInquiryModal }) => {
   useEffect(() => {
     updateSEO({
-      title: "About Us & Founder",
-      description: `Learn about TechWants Infotech and Founder & Technology Consultant Mansuri Mohammad. Custom web development, ERP software, and SEO.`,
+      title: "About Us",
+      description: `Learn about TechWants Infotech, our mission, vision, and technology services in custom web development, ERP software, and SEO.`,
       canonicalUrl: `${company.website}/about`
     });
   }, []);
@@ -33,8 +32,6 @@ export const About = ({ onOpenInquiryModal }) => {
         </div>
       </section>
 
-      {/* Founder Spotlight */}
-      <FounderSection onOpenInquiryModal={onOpenInquiryModal} />
 
       {/* Mission & Vision */}
       <section className="py-16 bg-slate-50">

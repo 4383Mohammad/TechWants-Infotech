@@ -171,13 +171,13 @@ export const BlogDetails = ({ onOpenInquiryModal }) => {
 
               <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex items-center justify-between gap-4">
                 <div>
-                  <div className="text-xs font-semibold text-slate-500 uppercase">Authored By</div>
-                  <div className="text-base font-bold text-slate-900">{blog.author}</div>
-                  <div className="text-xs text-brand-600 font-medium">{company.designation}, {company.name}</div>
+                  <div className="text-xs font-semibold text-slate-500 uppercase">Published By</div>
+                  <div className="text-base font-bold text-slate-900">{blog.author || company.name}</div>
+                  <div className="text-xs text-brand-600 font-medium">{company.name}</div>
                 </div>
 
                 <a
-                  href={getWhatsAppUrl(`Hello ${company.founder}, I read your article '${blog.title}' and would like to discuss a project.`)}
+                  href={getWhatsAppUrl(`Hello ${company.name} team, I read your article '${blog.title}' and would like to discuss a project.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black hover:bg-brand-600 text-white font-bold text-xs shadow-md border border-pink-500/20 transition-colors"

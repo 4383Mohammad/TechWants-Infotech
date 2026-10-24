@@ -111,7 +111,7 @@ export const addBlog = async (blogData) => {
     slug: slug,
     title: blogData.title || "Untitled Article",
     category: blogData.category || "Technology Insights",
-    author: blogData.author || "Mansuri Mohammad",
+    author: blogData.author || "TechWants Team",
     date: blogData.date || currentDate,
     updatedAt: currentDate,
     readTime: readTime,

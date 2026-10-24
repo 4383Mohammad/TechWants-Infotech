@@ -5,6 +5,7 @@ import { getBlogs, addBlog, deleteBlog } from '../services/blogService';
 import { auth } from '../firebase';
 import { company } from '../data/company';
 import { updateSEO } from '../utils/seo';
+import { getEmailComposeUrl, handleEmailClick } from '../utils/contact';
 import { Logo } from '../components/common/Logo';
 import { 
   Users, ShieldCheck, CheckCircle2, Clock, Trash2, Eye, RefreshCw, 
@@ -67,7 +68,7 @@ export const AdminDashboard = () => {
     slug: '',
     category: 'AEO & GEO',
     customCategory: '',
-    author: 'Mansuri Mohammad',
+    author: 'TechWants Team',
     readTime: '',
     image: '',
     excerpt: '',
@@ -297,7 +298,7 @@ export const AdminDashboard = () => {
       slug: '',
       category: 'AEO & GEO',
       customCategory: '',
-      author: 'Mansuri Mohammad',
+      author: 'TechWants Team',
       readTime: '',
       image: '',
       excerpt: '',
@@ -1066,7 +1067,14 @@ export const AdminDashboard = () => {
 
                   <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
                     <span className="text-slate-500 block text-[10px] uppercase font-bold mb-1">Email Address</span>
-                    <a href={`mailto:${selectedLead.email}`} className="font-bold text-white hover:text-brand-400 flex items-center gap-1.5 truncate">
+                    <a
+                      href={selectedLead.email ? getEmailComposeUrl(`Response from TechWants Infotech: Regarding ${selectedLead.service || 'your inquiry'}`, `Hello ${selectedLead.name || 'Client'},\n\nThank you for contacting TechWants Infotech regarding ${selectedLead.service || 'your project'}.\n\n`, selectedLead.email) : '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => selectedLead.email && handleEmailClick(e, `Response from TechWants Infotech: Regarding ${selectedLead.service || 'your inquiry'}`, `Hello ${selectedLead.name || 'Client'},\n\nThank you for contacting TechWants Infotech regarding ${selectedLead.service || 'your project'}.\n\n`, selectedLead.email)}
+                      className="font-bold text-white hover:text-brand-400 flex items-center gap-1.5 truncate"
+                      title="Click to open email compose"
+                    >
                       <Mail className="w-3.5 h-3.5 text-brand-400" />
                       <span className="truncate">{selectedLead.email || 'N/A'}</span>
                     </a>
@@ -1529,7 +1537,7 @@ export const AdminDashboard = () => {
                       type="text"
                       value={newBlogData.author}
                       onChange={(e) => setNewBlogData({ ...newBlogData, author: e.target.value })}
-                      placeholder="Mansuri Mohammad"
+                      placeholder="TechWants Team"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-brand-600"
                     />
                   </div>
@@ -1818,8 +1826,8 @@ export const AdminDashboard = () => {
                         "datePublished": previewSchemaBlog.date,
                         "dateModified": previewSchemaBlog.updatedAt || previewSchemaBlog.date,
                         "author": {
-                          "@type": "Person",
-                          "name": previewSchemaBlog.author || company.founder
+                          "@type": "Organization",
+                          "name": previewSchemaBlog.author || company.name
                         },
                         "publisher": {
                           "@type": "Organization",

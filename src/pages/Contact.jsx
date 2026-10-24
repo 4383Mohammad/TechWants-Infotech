@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, MessageSquareCode, Send, CheckCircle2, Clock, ShieldCheck, Sparkles } from 'lucide-react';
 import { company } from '../data/company';
 import { services } from '../data/services';
-import { getWhatsAppUrl, generateFormWhatsAppUrl } from '../utils/contact';
+import { getWhatsAppUrl, generateFormWhatsAppUrl, getEmailComposeUrl, handleEmailClick } from '../utils/contact';
 import { submitLead } from '../services/leadService';
 import { updateSEO } from '../utils/seo';
 
@@ -10,7 +10,7 @@ export const Contact = ({ onOpenInquiryModal }) => {
   useEffect(() => {
     updateSEO({
       title: "Contact Us",
-      description: `Contact ${company.name} and Founder Mansuri Mohammad. Phone / WhatsApp: ${company.phone}. Direct project inquiries and consultations.`,
+      description: `Contact ${company.name}. Phone / WhatsApp: ${company.phone}. Direct project inquiries and consultations.`,
       canonicalUrl: `${company.website}/contact`
     });
   }, []);
@@ -67,7 +67,7 @@ export const Contact = ({ onOpenInquiryModal }) => {
             LET'S DISCUSS <span className="text-gradient">YOUR NEXT PROJECT</span>
           </h1>
           <p className="text-slate-600 text-base sm:text-lg mt-4 leading-relaxed">
-            Have a project requirement or looking to automate your business software? Reach out to Founder & Technology Consultant Mansuri Mohammad.
+            Have a project requirement or looking to automate your business software? Reach out to the TechWants Infotech team.
           </p>
         </div>
       </section>
@@ -77,7 +77,7 @@ export const Contact = ({ onOpenInquiryModal }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
-            {/* Left Column: Direct Founder Contact Cards */}
+            {/* Left Column: Direct Contact Cards */}
             <div className="lg:col-span-5 space-y-6">
               
               <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
@@ -96,7 +96,7 @@ export const Contact = ({ onOpenInquiryModal }) => {
                     <div>
                       <div className="text-xs font-bold text-slate-700 uppercase">Phone & WhatsApp</div>
                       <a href={`tel:${company.phoneRaw}`} className="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors block">{company.phone}</a>
-                      <div className="text-xs text-slate-600 font-medium">Direct Founder Line: {company.founder}</div>
+                      <div className="text-xs text-slate-600 font-medium">Fast & Direct Assistance</div>
                     </div>
                   </div>
 
@@ -105,9 +105,19 @@ export const Contact = ({ onOpenInquiryModal }) => {
                       <div className="w-10 h-10 rounded-xl bg-pink-50 text-brand-900 flex items-center justify-center shrink-0">
                         <Mail className="w-5 h-5" />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <div className="text-xs font-bold text-slate-700 uppercase">Email Address</div>
-                        <a href={`mailto:${company.email}`} className="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors block">{company.email}</a>
+                        <a
+                          href={getEmailComposeUrl("Project Inquiry - TechWants Infotech")}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => handleEmailClick(e, "Project Inquiry - TechWants Infotech")}
+                          className="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors block truncate"
+                          title="Click to compose email"
+                        >
+                          {company.email}
+                        </a>
+                        <div className="text-xs text-brand-600 font-semibold mt-0.5">Click to open compose</div>
                       </div>
                     </div>
                   )}
@@ -143,6 +153,18 @@ export const Contact = ({ onOpenInquiryModal }) => {
                   >
                     <MessageSquareCode className="w-4 h-4 text-pink-400" />
                     <span>WhatsApp Consultation</span>
+                  </a>
+
+                  <a
+                    href={getEmailComposeUrl("Direct Project Inquiry - TechWants Infotech")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => handleEmailClick(e, "Direct Project Inquiry - TechWants Infotech")}
+                    aria-label={`Email TechWants Infotech: ${company.email}`}
+                    className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm shadow-sm border border-slate-200 hover:border-pink-300 transition-colors"
+                  >
+                    <Mail className="w-4 h-4 text-brand-600" />
+                    <span>Send Email (Compose)</span>
                   </a>
                 </div>
 
@@ -183,7 +205,7 @@ export const Contact = ({ onOpenInquiryModal }) => {
                     </div>
                     <h4 className="text-2xl font-bold text-slate-900">Connecting to WhatsApp...</h4>
                     <p className="text-sm text-slate-600 max-w-md mx-auto">
-                      Opening WhatsApp to send your inquiry directly to Founder Mansuri Mohammad.
+                      Opening WhatsApp to send your inquiry directly to our technical team.
                     </p>
                   </div>
                 ) : (

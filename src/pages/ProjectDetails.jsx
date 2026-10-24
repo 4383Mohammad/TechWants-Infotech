@@ -243,7 +243,7 @@ export const ProjectDetails = ({ onOpenInquiryModal }) => {
               <div className="bg-slate-950 p-6 rounded-3xl text-white space-y-4 border border-slate-800">
                 <h4 className="text-lg font-bold">Need a similar solution for your business?</h4>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Discuss your project requirement with Founder & Technology Consultant Mansuri Mohammad.
+                  Discuss your project requirement with our technical team.
                 </p>
 
                 <button
@@ -254,7 +254,7 @@ export const ProjectDetails = ({ onOpenInquiryModal }) => {
                 </button>
 
                 <a
-                  href={getWhatsAppUrl(`Hello Mansuri Mohammad, I reviewed your project '${project.title}' on TechWants Infotech and would like to discuss a similar solution.`)}
+                  href={getWhatsAppUrl(`Hello ${company.name} team, I reviewed your project '${project.title}' and would like to discuss a similar solution.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-black border border-pink-900/50 hover:border-pink-500 hover:bg-brand-600 text-pink-200 hover:text-white font-bold text-xs transition-colors"

@@ -91,7 +91,7 @@ export const AboutPreviewSection = () => {
             to="/about"
             className="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 animated-underline group"
           >
-            <span>LEARN MORE ABOUT OUR COMPANY &amp; FOUNDER</span>
+            <span>LEARN MORE ABOUT OUR COMPANY</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </AnimatedSection>
