@@ -1,6 +1,9 @@
-// Blog Service with LocalStorage persistence and dynamic CRUD
+// Blog Service with Firebase Cloud Firestore persistence & LocalStorage fallback
 import { blogs as initialBlogs } from '../data/blogs';
+import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
+const COLLECTION_NAME = 'blogs';
 const STORAGE_KEY = 'techwants_blogs_store';
 
 // Helper to format friendly dates like "October 3, 2026"
@@ -22,13 +25,7 @@ const loadFromStorage = () => {
       }
     }
   } catch (err) {
-    console.error('Error loading blogs from storage:', err);
-  }
-  // Initialize with predefined blogs if storage is empty
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialBlogs));
-  } catch (e) {
-    console.warn('LocalStorage not available:', e);
+    console.warn('Error loading blogs from storage:', err);
   }
   return [...initialBlogs];
 };
@@ -37,23 +34,58 @@ const saveToStorage = (blogsList) => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(blogsList));
   } catch (err) {
-    console.error('Error saving blogs to storage:', err);
+    console.warn('Error saving blogs to storage:', err);
   }
 };
 
 export const getBlogs = async () => {
-  return loadFromStorage();
+  const localBlogs = loadFromStorage();
+
+  try {
+    const snap = await getDocs(collection(db, COLLECTION_NAME));
+    const cloudBlogs = [];
+    snap.forEach((d) => {
+      cloudBlogs.push({ id: d.id, ...d.data() });
+    });
+
+    // Merge cloud blogs with initial blogs
+    const mergedMap = new Map();
+    // Default initial blogs first
+    initialBlogs.forEach((b) => mergedMap.set(b.slug, b));
+    // Cloud blogs overwrite / add
+    cloudBlogs.forEach((b) => mergedMap.set(b.slug, b));
+
+    // Also migrate any unique local blogs to cloud
+    for (const lb of localBlogs) {
+      if (!mergedMap.has(lb.slug) && lb.title) {
+        const docId = String(lb.slug || lb.id || Date.now());
+        try {
+          await setDoc(doc(db, COLLECTION_NAME, docId), lb);
+          mergedMap.set(lb.slug, lb);
+        } catch (uploadErr) {
+          console.warn("Could not sync local blog to cloud:", uploadErr);
+        }
+      }
+    }
+
+    const mergedList = Array.from(mergedMap.values());
+    saveToStorage(mergedList);
+    return mergedList;
+  } catch (err) {
+    console.warn('Firestore error in getBlogs, using local fallback:', err);
+    return localBlogs;
+  }
 };
 
 export const getBlogBySlug = async (slug) => {
-  const blogsList = loadFromStorage();
-  return blogsList.find(b => b.slug === slug || String(b.id) === String(slug)) || null;
+  const blogsList = await getBlogs();
+  return blogsList.find((b) => b.slug === slug || String(b.id) === String(slug)) || null;
 };
 
-export const getBlogCategories = () => {
-  const blogsList = loadFromStorage();
+export const getBlogCategories = (blogsList) => {
+  const blogs = blogsList || loadFromStorage();
   const cats = new Set(["All"]);
-  blogsList.forEach(b => {
+  blogs.forEach((b) => {
     if (b.category) cats.add(b.category);
   });
   return Array.from(cats);
@@ -74,7 +106,7 @@ export const addBlog = async (blogData) => {
   }
 
   // Ensure unique slug
-  if (currentBlogs.some(b => b.slug === slug)) {
+  if (currentBlogs.some((b) => b.slug === slug)) {
     slug = `${slug}-${Date.now().toString().slice(-4)}`;
   }
 
@@ -93,7 +125,7 @@ export const addBlog = async (blogData) => {
   if (Array.isArray(blogData.tags)) {
     tags = blogData.tags;
   } else if (typeof blogData.tags === 'string' && blogData.tags.trim()) {
-    tags = blogData.tags.split(',').map(t => t.trim()).filter(Boolean);
+    tags = blogData.tags.split(',').map((t) => t.trim()).filter(Boolean);
   } else {
     tags = ["TechWants Infotech", "Technology"];
   }
@@ -101,7 +133,7 @@ export const addBlog = async (blogData) => {
   // Process FAQ items for AEO rich snippets
   let faqItems = [];
   if (Array.isArray(blogData.faqItems)) {
-    faqItems = blogData.faqItems.filter(f => f.question && f.answer);
+    faqItems = blogData.faqItems.filter((f) => f.question && f.answer);
   }
 
   const currentDate = getFormattedDate();
@@ -125,26 +157,30 @@ export const addBlog = async (blogData) => {
     createdAt: new Date().toISOString()
   };
 
-  const updated = [newBlog, ...currentBlogs];
-  saveToStorage(updated);
-  
-  // Call our local Vite plugin API to save to the actual file system
+  // Save to Cloud Firestore
   try {
-    await fetch('/api/save-blog', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newBlog)
-    });
-  } catch(e) {
-    console.error('Failed to save to system file', e);
+    await setDoc(doc(db, COLLECTION_NAME, newBlog.slug), newBlog);
+  } catch (err) {
+    console.error("Error saving blog to Firestore:", err);
   }
-  
+
+  const updated = [newBlog, ...currentBlogs.filter((b) => b.slug !== newBlog.slug)];
+  saveToStorage(updated);
   return newBlog;
 };
 
 export const deleteBlog = async (id) => {
   const currentBlogs = loadFromStorage();
-  const updated = currentBlogs.filter(b => b.id !== id && b.slug !== id && String(b.id) !== String(id));
+  const target = currentBlogs.find((b) => b.id === id || b.slug === id || String(b.id) === String(id));
+  const docId = String(target?.slug || target?.id || id);
+
+  try {
+    await deleteDoc(doc(db, COLLECTION_NAME, docId));
+  } catch (err) {
+    console.error("Error deleting blog from Firestore:", err);
+  }
+
+  const updated = currentBlogs.filter((b) => b.id !== id && b.slug !== id && String(b.id) !== String(id));
   saveToStorage(updated);
   return updated;
 };
@@ -153,3 +189,4 @@ export const resetBlogs = async () => {
   saveToStorage(initialBlogs);
   return [...initialBlogs];
 };
+

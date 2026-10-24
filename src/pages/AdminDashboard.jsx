@@ -212,7 +212,7 @@ export const AdminDashboard = () => {
     const updated = await getProjects();
     setProjectsList(updated);
     setIsAddProjectModalOpen(false);
-    showToast(`New project "${newProjectData.title}" published!`);
+    showToast(`New project "${newProjectData.title}" published & synced to Cloud across all devices!`);
     setNewProjectData({
       title: '',
       category: 'Web Development',
@@ -840,7 +840,31 @@ export const AdminDashboard = () => {
                     </div>
 
                     <div className="p-4 border-t border-slate-800 flex items-center justify-between bg-slate-950/50 text-xs">
-                      <span className="text-slate-500 text-[11px]">{proj.client || 'Client Project'}</span>
+                      <div className="flex items-center gap-2">
+                        {proj.liveUrl && (
+                          <a
+                            href={proj.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-medium flex items-center gap-1.5 transition-colors"
+                            title="Visit Live Project"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5 text-brand-400" />
+                            <span>Live</span>
+                          </a>
+                        )}
+                        <a
+                          href={`/projects/${proj.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-medium flex items-center gap-1.5 transition-colors"
+                          title="View Project Details"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>View</span>
+                        </a>
+                      </div>
+
                       <button
                         onClick={() => setProjectToDelete(proj)}
                         className="px-3 py-1.5 rounded-lg bg-red-950/80 hover:bg-red-900 text-red-300 font-semibold border border-red-900/60 flex items-center gap-1.5"

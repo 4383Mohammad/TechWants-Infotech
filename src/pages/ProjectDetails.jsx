@@ -193,11 +193,14 @@ export const ProjectDetails = ({ onOpenInquiryModal }) => {
               </div>
 
               {/* Key Features */}
-              {project.features && project.features.length > 0 && (
+              {project.features && (Array.isArray(project.features) ? project.features.length > 0 : Boolean(project.features)) && (
                 <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
                   <h3 className="text-xl font-bold text-slate-900">Key Features Built</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {project.features.map((feat, idx) => (
+                    {(Array.isArray(project.features) 
+                      ? project.features 
+                      : (typeof project.features === 'string' ? project.features.split('\n').filter(Boolean) : [])
+                    ).map((feat, idx) => (
                       <div key={idx} className="flex items-center gap-2.5 text-sm font-semibold text-slate-700">
                         <CheckCircle2 className="w-4 h-4 text-brand-600 shrink-0" />
                         <span>{feat}</span>
@@ -208,11 +211,14 @@ export const ProjectDetails = ({ onOpenInquiryModal }) => {
               )}
 
               {/* Results (Only displayed if provided in data) */}
-              {project.results && project.results.length > 0 && (
+              {project.results && (Array.isArray(project.results) ? project.results.length > 0 : Boolean(project.results)) && (
                 <div className="bg-gradient-to-br from-brand-600 via-rose-600 to-pink-600 text-white p-8 rounded-3xl shadow-xl space-y-4">
                   <h3 className="text-xl font-bold">Verified Results</h3>
                   <ul className="space-y-2 text-sm font-medium">
-                    {project.results.map((res, idx) => (
+                    {(Array.isArray(project.results) 
+                      ? project.results 
+                      : (typeof project.results === 'string' ? project.results.split('\n').filter(Boolean) : [])
+                    ).map((res, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-white"></span>
                         <span>{res}</span>
@@ -232,7 +238,10 @@ export const ProjectDetails = ({ onOpenInquiryModal }) => {
                   Technologies Used
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, idx) => (
+                  {(Array.isArray(project.technologies) 
+                    ? project.technologies 
+                    : (typeof project.technologies === 'string' ? project.technologies.split(',').map(t => t.trim()) : [])
+                  ).map((tech, idx) => (
                     <span key={idx} className="px-3 py-1.5 rounded-xl bg-pink-50 text-brand-900 font-bold text-xs border border-pink-100">
                       {tech}
                     </span>

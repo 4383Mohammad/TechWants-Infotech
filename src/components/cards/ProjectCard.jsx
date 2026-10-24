@@ -73,12 +73,15 @@ export const ProjectCard = ({ project }) => {
         {/* Tech Badges */}
         <div className="pt-4 border-t border-slate-100">
           <div className="flex flex-wrap gap-1.5 mb-4">
-            {project.technologies.slice(0, 4).map((tech, idx) => (
+            {(Array.isArray(project.technologies) 
+              ? project.technologies 
+              : (typeof project.technologies === 'string' ? project.technologies.split(',').map(t => t.trim()) : [])
+            ).slice(0, 4).map((tech, idx) => (
               <span key={idx} className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 text-[11px] font-bold">
                 {tech}
               </span>
             ))}
-            {project.technologies.length > 4 && (
+            {(Array.isArray(project.technologies) ? project.technologies : []).length > 4 && (
               <span className="px-2 py-1 rounded-md bg-slate-100 text-slate-700 text-[10px] font-bold">
                 +{project.technologies.length - 4}
               </span>

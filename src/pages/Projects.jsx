@@ -35,8 +35,8 @@ export const Projects = ({ onOpenInquiryModal }) => {
     getProjects().then(data => {
       setAllProjects(data);
       setFilteredProjects(data);
-      setCategories(getProjectCategories());
-      setTechnologies(getAllTechnologies());
+      setCategories(getProjectCategories(data));
+      setTechnologies(getAllTechnologies(data));
     });
   }, []);
 
