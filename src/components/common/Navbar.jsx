@@ -42,10 +42,10 @@ export const Navbar = ({ onOpenInquiryModal }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ── Close mobile menu on route change ──
+  // ── Close mobile menu & unhide navbar on route change ──
   useEffect(() => {
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    setHidden(false);
   }, [location.pathname]);
 
   const navLinks = [
@@ -57,6 +57,20 @@ export const Navbar = ({ onOpenInquiryModal }) => {
     { name: 'Blog',         path: '/blog' },
     { name: 'Contact',      path: '/contact' },
   ];
+
+  const prefetchRoute = (path) => {
+    const prefetchers = {
+      '/about': () => import('../../pages/About'),
+      '/services': () => import('../../pages/Services'),
+      '/projects': () => import('../../pages/Projects'),
+      '/technologies': () => import('../../pages/Technologies'),
+      '/blog': () => import('../../pages/Blog'),
+      '/contact': () => import('../../pages/Contact'),
+    };
+    if (prefetchers[path]) {
+      prefetchers[path]().catch(() => {});
+    }
+  };
 
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -119,6 +133,8 @@ export const Navbar = ({ onOpenInquiryModal }) => {
                   <Link
                     key={link.path}
                     to={link.path}
+                    onMouseEnter={() => prefetchRoute(link.path)}
+                    onTouchStart={() => prefetchRoute(link.path)}
                     className={[
                       'relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200',
                       active
@@ -254,6 +270,7 @@ export const Navbar = ({ onOpenInquiryModal }) => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
+                  onTouchStart={() => prefetchRoute(link.path)}
                   style={{ transitionDelay: mobileMenuOpen ? `${i * 35}ms` : '0ms' }}
                   className={[
                     'flex items-center justify-between px-4 py-3 rounded-2xl text-base font-semibold transition-all duration-200',
